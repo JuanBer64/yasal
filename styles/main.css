@@ -1,0 +1,203 @@
+@import 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap';
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #667eea;
+    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--primary-gradient);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.dashboard-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.parallax-container {
+    background: var(--primary-gradient);
+}
+
+.parallax-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.login-card {
+    backdrop-filter: blur(20px);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.role-switch {
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+}
+
+.role-switch.active {
+    background: rgba(59, 130, 246, 0.8);
+    border-color: rgba(59, 130, 246, 1);
+    color: white;
+}
+
+.admin-trigger {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.admin-trigger.visible {
+    opacity: 1;
+}
+
+
+/* Fade in animation for secret admin button */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.5s ease-in forwards;
+}
+
+/* Role Switch Styles */
+.role-switch-wrapper {
+    display: flex;
+    justify-content: center;
+    margin: 1rem 0;
+    transition: all 0.3s ease;
+}
+
+.role-switch-label {
+    color: white;
+    width: fit-content;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    position: relative;
+    border-radius: 9999px;
+    cursor: pointer;
+    background-color: rgba(112, 169, 197, 0.8);
+    padding: 4px;
+    isolation: isolate;
+    transition: all 0.3s ease;
+}
+
+.role-switch-input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+.role-option {
+    display: grid;
+    place-content: center;
+    padding: 1rem 2rem;
+    transition: opacity 300ms ease-in-out 150ms;
+    font-weight: 500;
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+.role-switch-label::before {
+    content: "";
+    position: absolute;
+    border-radius: inherit;
+    background-color: rgba(12, 74, 110, 0.65);
+    inset: 4px 50% 4px 4px;
+    transition: inset 500ms cubic-bezier(0.47, 1.64, 0.41, 0.8), background-color 500ms ease-in-out;
+    z-index: -1;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.3);
+}
+
+.role-switch-label:has(input:checked)::before {
+    background-color: rgba(12, 74, 110, 1);
+    inset: 4px 4px 4px 50%;
+}
+
+.role-option:last-of-type,
+.role-switch-label:has(input:checked) .role-option:first-of-type {
+    opacity: 0.75;
+}
+
+.role-switch-label:has(input:checked) .role-option:last-of-type {
+    opacity: 1;
+}
+
+/* Admin Switch Styles */
+.admin-switch {
+    position: relative;
+    display: flex;
+    background-color: rgba(112, 169, 197, 0.8);
+    border-radius: 9999px;
+    padding: 4px;
+    color: white;
+    isolation: isolate;
+}
+
+.admin-option {
+    flex: 1;
+    padding: 1rem 1.5rem;
+    background: none;
+    border: none;
+    color: white;
+    font-weight: 500;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: opacity 300ms ease-in-out;
+    z-index: 1;
+    position: relative;
+}
+
+.admin-option.active {
+    opacity: 1;
+}
+
+.admin-option:not(.active) {
+    opacity: 0.75;
+}
+
+.admin-slider {
+    position: absolute;
+    top: 4px;
+    bottom: 4px;
+    background-color: rgba(12, 74, 110, 1);
+    border-radius: inherit;
+    transition: left 500ms cubic-bezier(0.47, 1.64, 0.41, 0.8), width 500ms cubic-bezier(0.47, 1.64, 0.41, 0.8);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.3);
+    z-index: 0;
+}
